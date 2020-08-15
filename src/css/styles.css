@@ -38,6 +38,50 @@ header h2 {
     margin: 0 1vw;
 }
 
+/* --------------------------------------------gameField*/
+
+.gameField {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100%;
+}
+
+.player1Bar, .player2Bar {
+    position: absolute;
+    height: 13%;
+    width: 1vw;
+    background-color: aqua;
+    border: 1px solid black;
+}
+
+.player1Box {
+    border-right: 2px dashed black;
+}
+
+.player1Box, .player2Box {
+    color: white;
+}
+
+.player1Bar {
+    top: 45%;
+}
+
+.player2Bar {
+    top: 45%;
+    right: 0;
+}
+
+.ball {
+    position: absolute;
+    height: 2vh;
+    width: 2vh;
+    border: 1px solid red;
+    background-color: white;
+    top: 45%;
+    left: 49.5%;
+}
+
 /* --------------------------------------------footer*/
 footer {
     display: flex;
@@ -51,5 +95,6 @@ footer a {
     text-decoration: none;
     color: orange;
 }
+
 
 
