@@ -47,7 +47,7 @@ header h2 {
     height: 100%;
 }
 
-.player1Bar, .player2Bar {
+#player1Bar, #player2Bar {
     position: absolute;
     height: 13%;
     width: 1vw;
@@ -55,24 +55,24 @@ header h2 {
     border: 1px solid black;
 }
 
-.player1Box {
+#player1Box {
     border-right: 2px dashed black;
 }
 
-.player1Box, .player2Box {
+#player1Box, #player2Box {
     color: white;
 }
 
-.player1Bar {
+#player1Bar {
     top: 45%;
 }
 
-.player2Bar {
+#player2Bar {
     top: 45%;
     right: 0;
 }
 
-.ball {
+#ball {
     position: absolute;
     height: 2vh;
     width: 2vh;
