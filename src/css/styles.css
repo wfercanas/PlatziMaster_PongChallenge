@@ -10,7 +10,7 @@ h1, h2, h3, h4, h5, h6, p {
 body {
     display: grid;
     height: 95vh;
-    grid-template-rows: 2fr 15fr 1fr;
+    grid-template-rows: 10vh 85vh 3vh;
     font-size: 10px;
 }
 
@@ -63,10 +63,6 @@ header h2 {
     color: white;
 }
 
-#player1Bar {
-    top: 45%;
-}
-
 #player2Bar {
     top: 45%;
     right: 0;
@@ -95,6 +91,3 @@ footer a {
     text-decoration: none;
     color: orange;
 }
-
-
-
