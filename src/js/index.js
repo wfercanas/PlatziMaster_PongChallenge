@@ -51,7 +51,7 @@ let player2 = {
     },
 
     movePlayer2: function() {
-        if(ball.posY > player2.position && ball.angle < 180) player2.position += 0.08
+        if(ball.posY > player2.position && ball.angle < 180 && player2.position <= 73.5) player2.position += 0.08
         if(ball.posY < player2.position && ball.angle < 180) player2.position -= 0.08
         player2.element.style.top = `${player2.position}vh`
     }
