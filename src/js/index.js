@@ -48,7 +48,7 @@ let ball = {
     element: document.getElementById('ball'),
     posX: 48,
     posY: 40,
-    angle: 91,
+    angle: Math.floor(360*Math.random()),
     speed: 0.09,
 
     resetPosition: function(){
