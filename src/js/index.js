@@ -1,3 +1,24 @@
+//----------------------------------------------Game
+var game = {
+    player1Score: document.getElementById('Score1'),
+    player1Points: 0,
+    player2Score: document.getElementById('Score2'),
+    player2Points: 0,
+
+    player1Goal: function(){
+        game.player1Points++
+        console.log(`Player1: ${game.player1Points}`)
+        document.getElementById('Score1').innerHTML = `${game.player1Points}`
+    },
+    player2Goal: function(){
+        game.player2Points++
+        console.log(`Player2: ${game.player2Points}`)
+        game.player2Score.innerHTML = `${game.player2Points}`
+    }
+
+}
+
+
 //----------------------------------------------Player1
 let player1 = {
     element: document.getElementById('player1Bar'),
@@ -27,7 +48,7 @@ let ball = {
     element: document.getElementById('ball'),
     posX: 48,
     posY: 40,
-    angle: 290,
+    angle: 91,
     speed: 0.09,
 
     resetPosition: function(){
@@ -41,6 +62,8 @@ let ball = {
     
     moveBall: function (){      
         if(ball.posX<=0 || ball.posX >= 98 || ball.posY <= 0 || ball.posY >= 82.6){
+            if(ball.posX <= 0) game.player2Goal()
+            if(ball.posX >= 98) game.player1Goal()
             ball.changeBallDirection()
         } else {
             ball.posX += ball.speed * Math.sin(ball.angle * Math.PI/180)
