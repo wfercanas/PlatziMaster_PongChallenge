@@ -20,7 +20,7 @@ header {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-image: linear-gradient(to bottom right, #fff, #c3c3c3a2 );
+    background-image: linear-gradient(to bottom right, #cffffe, #f9f7d9 );
 }
 
 header h2 {
@@ -51,8 +51,15 @@ header h2 {
     position: absolute;
     height: 11vh;
     width: 1vw;
-    background-color: aqua;
-    border: 1px solid black;
+    border: 1px solid lightslategray;
+}
+
+#player1Bar {
+    background-color: #cffffe;
+}
+
+#player2Bar {
+    background-color: #f9f7d9;
 }
 
 #player1Box {

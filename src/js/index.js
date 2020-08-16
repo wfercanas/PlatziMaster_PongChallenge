@@ -51,8 +51,8 @@ let player2 = {
     },
 
     movePlayer2: function() {
-        if(ball.posY > player2.position && ball.angle < 180) player2.position += 0.07
-        if(ball.posY < player2.position && ball.angle < 180) player2.position -= 0.07
+        if(ball.posY > player2.position && ball.angle < 180) player2.position += 0.08
+        if(ball.posY < player2.position && ball.angle < 180) player2.position -= 0.08
         player2.element.style.top = `${player2.position}vh`
     }
 }
@@ -63,7 +63,7 @@ let ball = {
     posX: 48,
     posY: 40,
     angle: 360*Math.random(),
-    speed: 0.12,
+    speed: 0.15,
 
     resetPosition: function(){
         ball.posX = 48
