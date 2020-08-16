@@ -25,43 +25,68 @@ let player1 = {
 //-----------------------------------------------Ball
 let ball = {
     element: document.getElementById('ball'),
-    // positionX: ,
-    // positionY:
-    // angle: ,
-    // speed: ,
+    posX: 48,
+    posY: 40,
+    angle: 290,
+    speed: 0.09,
+
+    resetPosition: function(){
+        ball.element.style.top = '82.6vh'
+        ball.element.style.left = 'center'
+    },
+
+    cicleBall: function(){
+        setInterval(() => ball.moveBall(), 1)
+    },
+    
+    moveBall: function (){      
+        if(ball.posX<=0 || ball.posX >= 98 || ball.posY <= 0 || ball.posY >= 82.6){
+            ball.changeBallDirection()
+        } else {
+            ball.posX += ball.speed * Math.sin(ball.angle * Math.PI/180)
+            ball.element.style.left = `${ball.posX}vw`
+            ball.posY -= ball.speed * Math.cos(ball.angle * Math.PI/180)
+            ball.element.style.top = `${ball.posY}vh`
+        }
+        
+    },
+
+    changeBallDirection: function(){
+        if (ball.posX <= 0 && ball.angle <= 270){
+            ball.angle -= 2 * (ball.angle - 180)
+            ball.posX++
+        } else if(ball.posX <= 0 && ball.angle > 270){
+            ball.angle -= 360 - 2*(360-ball.angle)
+            ball.posX++
+        } else if (ball.posX >= 98 && ball.angle <= 90) {
+            ball.angle += 180 + 2*(90-ball.angle)
+            ball.posX--
+        } else if (ball.posX >= 98 && ball.angle > 90) {
+            ball.angle += 180 - 2*(ball.angle-90)
+            ball.posX--
+        } else if (ball.posY <= 0 && ball.angle >= 270) {
+            ball.angle -= 2*(ball.angle - 270)
+            ball.posY++
+        } else if (ball.posY <= 0 && ball.angle <= 90){
+            ball.angle += 180 - 2*ball.angle
+            ball.posY++
+        } else if (ball.posY >= 82.6 && ball.angle <= 180){
+            ball.angle -= 2 * (ball.angle - 90)
+            ball.posY--
+        } else {
+            ball.angle += 2 * (270 - ball.angle)
+            ball.posY--
+        }
+    }
+
 }
-
-
-// const player2 = document.getElementById('player2Bar')
-// const score1 = document.getElementById('player1Score')
-// const score2 = document.getElementById('player2Score')
 
 //Agregar eventos
 function agregarEventos() {
+    document.addEventListener('load', player1.resetPosition()) 
+    document.addEventListener('load', ball.resetPosition()) 
+    document.addEventListener('load', ball.cicleBall())
     document.addEventListener('keydown', player1.movePlayer)
-    document.addEventListener('keydown', moveBall)
-}
-
-
-
-
-//Movimiento del balón
-let ballPosX = 0
-let ballPosY = 0
-
-function moveBall(event){
-    console.log(event)
-    //down: 40, up: 38
-    switch(event.keyCode){
-        case 40:
-            ballPosY += 10
-            break
-        case 38:
-            ballPosY -= 10
-            break
-    }
-    ball.style.top = `${ballPosY}px`
 }
 
 agregarEventos()
-document.addEventListener('load', player1.resetPosition()) 
