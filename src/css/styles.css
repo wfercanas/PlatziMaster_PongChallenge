@@ -38,6 +38,15 @@ header h2 {
     margin: 0 1vw;
 }
 
+.versus {
+    text-align: center;
+}
+
+#level {
+    font-size: 1rem;
+    color: rebeccapurple;
+}
+
 /* --------------------------------------------gameField*/
 
 .gameField {
