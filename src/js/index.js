@@ -1,17 +1,47 @@
 //----------------------------------------------Game
-let game = {
-    player1Score: document.getElementById('Score1'),
-    player1Points: 0,
-    player2Score: document.getElementById('Score2'),
-    player2Points: 0,
+class match {
+    constructor() {
+        this.btnStart = document.getElementById('btnStart')
+        this.btnRetry = document.getElementById('btnRetry')
+        this.player1Score = document.getElementById('Score1')
+        this.player1Points = 0
+        this.player2Score = document.getElementById('Score2')
+        this.player2Points = 0
+        this.totalLevels = 10
+        this.currentLevel = 1
+        this.toggleBtnStart()
+        this.gameOn()
+    }
 
-    player1Goal: function(){
-        game.player1Points++
-        document.getElementById('Score1').innerHTML = `${game.player1Points}`
-    },
-    player2Goal: function(){
-        game.player2Points++
-        game.player2Score.innerHTML = `${game.player2Points}`
+    toggleBtnStart(){
+        if(this.btnStart.classList.contains('hide')){
+            this.btnStart.classList.remove('hide')
+        } else {
+            this.btnStart.classList.add('hide')
+        }
+    }
+
+    toggleBtnRetry(){
+        if(this.btnRetry.classList.contains('hide')){
+            this.btnRetry.classList.remove('hide')
+        } else {
+            this.btnRetry.classList.add('hide')
+        }
+    }
+
+    gameOn(){
+        var rollOn = setInterval(() => ball.moveBall(), 1)
+        clearInterval(rollOn)
+    }
+
+    player1Goal(){
+        this.player1Points++
+        this.player1Score.innerHTML = `${this.player1Points}`
+    }
+    
+    player2Goal(){
+        this.player2Points++
+        this.player2Score.innerHTML = `${this.player2Points}`
     }
 }
 
@@ -71,10 +101,6 @@ let ball = {
         ball.element.style.top = `${ball.posY}vh`
         ball.element.style.left = `${ball.posX}vw`
     },
-
-    cicleBall: function(){
-        setInterval(() => ball.moveBall(), 1)
-    },
     
     moveBall: function (){
         if(ball.posX <= 1 && ball.posY >= player1.position && ball.posY<= (player1.position + 11)) {
@@ -132,11 +158,17 @@ let ball = {
 
 //Agregar eventos
 function agregarEventos() {
+    
     document.addEventListener('load', player1.resetPosition()) 
     document.addEventListener('load', ball.resetPosition()) 
-    document.addEventListener('load', ball.cicleBall())
+    // document.addEventListener('load', ball.cicleBall())
     document.addEventListener('load', player2.ciclePlayer2())
     document.addEventListener('keydown', player1.movePlayer1)
 }
 
 agregarEventos()
+
+function newGame() {
+    window.game = new match()
+}
+

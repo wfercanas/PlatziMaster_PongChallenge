@@ -14,13 +14,16 @@ body {
     font-size: 10px;
 }
 
+
+
 /* --------------------------------------------Header*/
 
 header {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-image: linear-gradient(to bottom right, #cffffe, #f9f7d9 );
+    background-image: linear-gradient(to right, #cffffe, #f9f7d9 );
+    border-radius: 5vw;
 }
 
 header h2 {
@@ -61,6 +64,7 @@ header h2 {
     height: 11vh;
     width: 1vw;
     border: 1px solid lightslategray;
+    border-radius: 2vw;
 }
 
 #player1Bar {
@@ -93,6 +97,24 @@ header h2 {
     top: 45%;
     left: 49.5%;
     border-radius: 50%;
+}
+
+.hide {
+    display: none;
+}
+
+button {
+    position: absolute;
+    height: 50px;
+    width: 200px;
+    top: calc(50% - 25px);
+    left: calc(50% - 100px);
+    background-color: aliceblue;
+    border: 1px solid rebeccapurple;
+}
+
+button:hover {
+    cursor: pointer;
 }
 
 /* --------------------------------------------footer*/
