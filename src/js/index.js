@@ -2,15 +2,18 @@
 class match {
     constructor() {
         this.btnStart = document.getElementById('btnStart')
+        this.btnNextLevel = document.getElementById('btnNextLevel')
         this.btnRetry = document.getElementById('btnRetry')
         this.player1Score = document.getElementById('Score1')
-        this.player1Points = 0
         this.player2Score = document.getElementById('Score2')
-        this.player2Points = 0
+        this.displayLevel = document.getElementById('level')
         this.totalLevels = 10
         this.currentLevel = 1
+        this.player1Points = 0
+        this.player2Points = 0
         this.toggleBtnStart()
-        this.gameOn()
+        this.printLevel()
+        this.gameOn = setInterval(() => ball.moveBall(), 1)
     }
 
     toggleBtnStart(){
@@ -18,6 +21,14 @@ class match {
             this.btnStart.classList.remove('hide')
         } else {
             this.btnStart.classList.add('hide')
+        }
+    }
+
+    toggleBtnNextLevel(){
+        if(this.btnNextLevel.classList.contains('hide')){
+            this.btnNextLevel.classList.remove('hide')
+        } else {
+            this.btnNextLevel.classList.add('hide')
         }
     }
 
@@ -29,19 +40,68 @@ class match {
         }
     }
 
-    gameOn(){
-        var rollOn = setInterval(() => ball.moveBall(), 1)
-        clearInterval(rollOn)
+    resetScore(){
+        this.player1Points = 0
+        this.player1Score.innerHTML = `${this.player1Points}`
+        this.player2Points = 0
+        this.player2Score.innerHTML = `${this.player2Points}`
     }
 
-    player1Goal(){
-        this.player1Points++
-        this.player1Score.innerHTML = `${this.player1Points}`
+    resetGame(){
+        this.resetScore()
+        this.currentLevel = 1
+
     }
-    
-    player2Goal(){
-        this.player2Points++
-        this.player2Score.innerHTML = `${this.player2Points}`
+
+    printLevel() {
+        this.displayLevel.innerHTML = `Level: ${this.currentLevel}/${this.totalLevels}`
+    }
+
+    goal(player){
+        if (player == 'player1') {
+            this.player1Points++
+            this.player1Score.innerHTML = `${this.player1Points}`
+        } else {
+            this.player2Points++
+            this.player2Score.innerHTML = `${this.player2Points}`
+        }
+
+        if (this.player1Points == 4){
+            console.log('Player1 wins')
+            clearInterval(this.gameOn)
+            if (this.currentLevel == this.totalLevels){
+                this.gameWon()
+                this.toggleBtnRetry()
+            } else {
+                this.toggleBtnNextLevel()
+            }
+        } else if (this.player2Points == 4){
+            console.log('Player2 wins')
+            clearInterval(this.gameOn)
+            this.gameOver()
+        } else if (this.player1Points ==  3){
+            if(this.player2Points == 3){
+                console.log('Last point wins')
+            } else {
+                console.log('Player1: game point')
+            }
+        } else if (this.player2Points == 3) {
+            console.log('Player2: game point')
+        }
+    }
+
+    gameOver(){
+        swal('Game Over','You can always try again', 'error')
+        .then(() => {
+            this.toggleBtnRetry()
+        })
+    }
+
+    gameWon(){
+        swal('Victory!', 'Well played', 'success')
+        .then(() => {
+          this.inicializar();
+        })
     }
 }
 
@@ -113,11 +173,11 @@ let ball = {
 
         if(ball.posX<=0 || ball.posX >= 98){
             if(ball.posX <= 0) {
-                game.player2Goal()
+                game.goal('player2')
                 ball.angle = 100 + 60*Math.random()
             }
             if(ball.posX >= 98) {
-                game.player1Goal()
+                game.goal('player1')
                 ball.angle = 270 - 60*Math.random()
             }
             ball.resetPosition()
@@ -150,25 +210,38 @@ let ball = {
         }
     },
 
-    kickBall: function(kiker) {
-        (kiker == 'player1') ? ball.angle = 25 + Math.random()*130 : ball.angle = 335 - Math.random()*130
+    kickBall: function(kicker) {
+        (kicker == 'player1') ? ball.angle = 25 + Math.random()*130 : ball.angle = 335 - Math.random()*130
     }
 
 }
 
 //Agregar eventos
 function agregarEventos() {
-    
     document.addEventListener('load', player1.resetPosition()) 
     document.addEventListener('load', ball.resetPosition()) 
-    // document.addEventListener('load', ball.cicleBall())
     document.addEventListener('load', player2.ciclePlayer2())
     document.addEventListener('keydown', player1.movePlayer1)
 }
 
-agregarEventos()
-
 function newGame() {
+    agregarEventos()
     window.game = new match()
+}
+
+function nextLevel(){
+    game.toggleBtnNextLevel()
+    game.currentLevel++
+    game.resetScore()
+    game.printLevel()
+    game.gameOn = setInterval(() => ball.moveBall(), 1)
+}
+
+function retryGame(){
+    game.toggleBtnRetry()
+    game.currentLevel = 1
+    game.resetScore()
+    game.printLevel()
+    game.gameOn = setInterval(() => ball.moveBall(), 1)
 }
 
