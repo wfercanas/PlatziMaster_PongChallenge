@@ -7,6 +7,7 @@ class match {
         this.player1Score = document.getElementById('Score1')
         this.player2Score = document.getElementById('Score2')
         this.displayLevel = document.getElementById('level')
+        this.screen = document.getElementById('screen')
         this.totalLevels = 10
         this.currentLevel = 1
         this.player1Points = 0
@@ -40,6 +41,16 @@ class match {
         }
     }
 
+    toggleScreen(){
+        if(this.screen.classList.contains('flex')){
+            this.screen.classList.remove('flex')
+            this.screen.classList.add('hide')
+        } else {
+            this.screen.classList.remove('hide')
+            this.screen.classList.add('flex')
+        }
+    }
+
     resetScore(){
         this.player1Points = 0
         this.player1Score.innerHTML = `${this.player1Points}`
@@ -67,26 +78,29 @@ class match {
         }
 
         if (this.player1Points == 4){
-            console.log('Player1 wins')
+            this.screen.innerHTML = 'Player1 wins'
             clearInterval(this.gameOn)
             if (this.currentLevel == this.totalLevels){
                 this.gameWon()
-                this.toggleBtnRetry()
             } else {
                 this.toggleBtnNextLevel()
             }
         } else if (this.player2Points == 4){
-            console.log('Player2 wins')
+            this.screen.innerHTML = 'Player2 wins'
             clearInterval(this.gameOn)
             this.gameOver()
         } else if (this.player1Points ==  3){
             if(this.player2Points == 3){
-                console.log('Last point wins')
+                this.screen.innerHTML = 'Last point wins'
             } else {
-                console.log('Player1: game point')
+                this.screen.innerHTML = 'Player1 game point'
             }
         } else if (this.player2Points == 3) {
-            console.log('Player2: game point')
+            this.screen.innerHTML = 'Player2 game point'
+        }
+
+        if (this.player1Points == 3 || this.player2Points == 3){
+            if(this.screen.classList.contains('hide')) this.toggleScreen()
         }
     }
 
@@ -100,7 +114,7 @@ class match {
     gameWon(){
         swal('Victory!', 'Well played', 'success')
         .then(() => {
-          this.inicializar();
+            this.toggleBtnRetry()
         })
     }
 }
@@ -231,6 +245,7 @@ function newGame() {
 
 function nextLevel(){
     game.toggleBtnNextLevel()
+    game.toggleScreen()
     game.currentLevel++
     game.resetScore()
     game.printLevel()
@@ -239,6 +254,7 @@ function nextLevel(){
 
 function retryGame(){
     game.toggleBtnRetry()
+    game.toggleScreen()
     game.currentLevel = 1
     game.resetScore()
     game.printLevel()

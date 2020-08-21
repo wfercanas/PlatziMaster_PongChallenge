@@ -52,6 +52,10 @@ header h2 {
 
 /* --------------------------------------------gameField*/
 
+main {
+    position: relative;
+}
+
 .gameField {
     position: relative;
     display: grid;
@@ -98,16 +102,14 @@ header h2 {
     border-radius: 50%;
 }
 
-.hide {
-    display: none;
-}
+
 
 #btnStart, #btnNextLevel, #btnRetry {
     position: absolute;
-    height: 50px;
-    width: 200px;
-    top: calc(50% - 25px);
-    left: calc(50% - 100px);
+    height: 10vh;
+    width: 20vw;
+    top: calc(50% - 5vh);
+    left: calc(50% - 10vw);
     background-color: aliceblue;
     border: 1px solid rebeccapurple;
 }
@@ -115,6 +117,29 @@ header h2 {
 button:hover {
     cursor: pointer;
 }
+
+#screen {
+    position: absolute;
+    height: 5vh;
+    width: 20vw;
+    top: 5vh;
+    left: calc(50% - 10vw);
+    background-color: lightslategray;
+    color: white;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hide {
+    display: none;
+}
+
 
 /* --------------------------------------------footer*/
 footer {
