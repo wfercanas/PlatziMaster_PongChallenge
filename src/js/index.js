@@ -149,14 +149,15 @@ let player1 = {
 let player2 = {
     element: document.getElementById('player2Bar'),
     position: 35,
+    speed: 0.04,
 
     ciclePlayer2: function() {
         setInterval(() => player2.movePlayer2(),1)
     },
 
     movePlayer2: function() {
-        if(ball.posY > player2.position && ball.angle < 180 && player2.position <= 73.5) player2.position += 0.01
-        if(ball.posY < player2.position && ball.angle < 180) player2.position -= 0.01
+        if(ball.posY > player2.position && ball.angle < 180 && player2.position <= 73.5) player2.position += this.speed
+        if(ball.posY < player2.position && ball.angle < 180) player2.position -= this.speed
         player2.element.style.top = `${player2.position}vh`
     }
 }
@@ -251,6 +252,7 @@ function newGame() {
 function nextLevel(){
     game.currentLevel++
     ball.speed += 0.01
+    player2.speed += 0.01
     game.toggleBtnNextLevel()
     game.toggleScreen()
     game.resetScore()
@@ -261,6 +263,7 @@ function nextLevel(){
 function retryGame(){
     game.currentLevel = 1
     ball.speed = 0.1
+    player2.speed = 0.01
     game.toggleBtnRetry()
     game.toggleScreen()
     game.resetScore()
