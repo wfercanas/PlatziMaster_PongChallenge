@@ -168,6 +168,9 @@ let ball = {
     posY: 40,
     angle: 360*Math.random(),
     speed: 0.15,
+    barsWidth: 1,
+    barsHeight: 11,
+    ballHeight: 2,
 
     resetPosition: function(){
         ball.posX = 48
@@ -177,11 +180,11 @@ let ball = {
     },
     
     moveBall: function (){
-        if(ball.posX <= 1 && ball.posY >= player1.position && ball.posY<= (player1.position + 11)) {
+        if(ball.posX <= this.barsWidth && (ball.posY+this.ballHeight) >= player1.position && ball.posY<= (player1.position + this.barsHeight)) {
             ball.kickBall('player1')
         }
 
-        if(ball.posX >= 97 && ball.posY >= player2.position && ball.posY <= (player2.position + 11)){
+        if(ball.posX >= (100-(this.barsWidth+this.ballHeight)) && (ball.posY+this.ballHeight) >= player2.position && ball.posY <= (player2.position + this.barsHeight)){
             ball.kickBall('player2')
         }
 
