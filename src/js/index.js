@@ -155,31 +155,33 @@ let player2 = {
     },
 
     movePlayer2: function() {
-        if(ball.posY > player2.position && ball.angle < 180 && player2.position <= 73.5) player2.position += 0.08
-        if(ball.posY < player2.position && ball.angle < 180) player2.position -= 0.08
+        if(ball.posY > player2.position && ball.angle < 180 && player2.position <= 73.5) player2.position += 0.01
+        if(ball.posY < player2.position && ball.angle < 180) player2.position -= 0.01
         player2.element.style.top = `${player2.position}vh`
     }
 }
 
 //-----------------------------------------------Ball
-let ball = {
-    element: document.getElementById('ball'),
-    posX: 48,
-    posY: 40,
-    angle: 360*Math.random(),
-    speed: 0.15,
-    barsWidth: 1,
-    barsHeight: 11,
-    ballHeight: 2,
+class baller {
+    constructor(){
+        this.element = document.getElementById('ball')
+        this.posX = 48
+        this.posY = 40
+        this.angle = 360*Math.random()
+        this.speed = 0.10
+        this.barsWidth = 1
+        this.barsHeight = 11
+        this.ballHeight = 2
+    }
 
-    resetPosition: function(){
+    resetPosition(){
         ball.posX = 48
         ball.posY = 40
         ball.element.style.top = `${ball.posY}vh`
         ball.element.style.left = `${ball.posX}vw`
-    },
-    
-    moveBall: function (){
+    }
+
+    moveBall(){
         if(ball.posX <= this.barsWidth && (ball.posY+this.ballHeight) >= player1.position && ball.posY<= (player1.position + this.barsHeight)) {
             ball.kickBall('player1')
         }
@@ -209,9 +211,9 @@ let ball = {
             ball.element.style.top = `${ball.posY}vh`
         }
         
-    },
+    }
 
-    changeBallDirection: function(){
+    changeBallDirection(){
         if (ball.posY <= 0 && ball.angle >= 270) {
             ball.angle -= 2*(ball.angle - 270)
             ball.posY++
@@ -225,12 +227,11 @@ let ball = {
             ball.angle += 2 * (270 - ball.angle)
             ball.posY--
         }
-    },
-
-    kickBall: function(kicker) {
-        (kicker == 'player1') ? ball.angle = 25 + Math.random()*130 : ball.angle = 335 - Math.random()*130
     }
 
+    kickBall(kicker) {
+        (kicker == 'player1') ? ball.angle = 25 + Math.random()*130 : ball.angle = 335 - Math.random()*130
+    }
 }
 
 //Agregar eventos
@@ -242,23 +243,26 @@ function agregarEventos() {
 }
 
 function newGame() {
-    agregarEventos()
+    window.ball = new baller()
     window.game = new match()
+    agregarEventos()
 }
 
 function nextLevel(){
+    game.currentLevel++
+    ball.speed += 0.01
     game.toggleBtnNextLevel()
     game.toggleScreen()
-    game.currentLevel++
     game.resetScore()
     game.printLevel()
     game.gameOn = setInterval(() => ball.moveBall(), 1)
 }
 
 function retryGame(){
+    game.currentLevel = 1
+    ball.speed = 0.1
     game.toggleBtnRetry()
     game.toggleScreen()
-    game.currentLevel = 1
     game.resetScore()
     game.printLevel()
     game.gameOn = setInterval(() => ball.moveBall(), 1)
