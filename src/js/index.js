@@ -78,7 +78,7 @@ class match {
         }
 
         if (this.player1Points == 4){
-            this.screen.innerHTML = 'Player1 wins'
+            this.screen.innerHTML = '[Player1]: wins'
             clearInterval(this.gameOn)
             if (this.currentLevel == this.totalLevels){
                 this.gameWon()
@@ -86,17 +86,17 @@ class match {
                 this.toggleBtnNextLevel()
             }
         } else if (this.player2Points == 4){
-            this.screen.innerHTML = 'Player2 wins'
+            this.screen.innerHTML = '[Player2]: wins'
             clearInterval(this.gameOn)
             this.gameOver()
         } else if (this.player1Points ==  3){
             if(this.player2Points == 3){
                 this.screen.innerHTML = 'Last point wins'
             } else {
-                this.screen.innerHTML = 'Player1 game point'
+                this.screen.innerHTML = '[Player1]: game point'
             }
         } else if (this.player2Points == 3) {
-            this.screen.innerHTML = 'Player2 game point'
+            this.screen.innerHTML = '[Player2]: game point'
         }
 
         if (this.player1Points == 3 || this.player2Points == 3){

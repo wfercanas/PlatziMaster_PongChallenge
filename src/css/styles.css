@@ -80,7 +80,7 @@ main {
 }
 
 #player1Box {
-    border-right: 2px dashed black;
+    border-right: 2px dashed lightgray;
 }
 
 #player1Box, #player2Box {
@@ -110,8 +110,12 @@ main {
     width: 20vw;
     top: calc(50% - 5vh);
     left: calc(50% - 10vw);
-    background-color: aliceblue;
-    border: 1px solid rebeccapurple;
+    background-color: #ea5455;
+    /* border: 1px solid rebeccapurple; */
+    border-radius: 3vw;
+    box-shadow: 4px 2px 2px 2px #dbe3e5;
+    font-size: 1.5rem;
+    color: #2d4059;
 }
 
 button:hover {
@@ -124,10 +128,12 @@ button:hover {
     width: 20vw;
     top: 5vh;
     left: calc(50% - 10vw);
-    background-color: lightslategray;
-    color: white;
+    background-color: #ea5455AA;
+    color: #2d4059;
     font-size: 1rem;
+    font-weight: bold;
     text-align: center;
+    border-radius: 3vw;
 }
 
 .flex {
