@@ -73,6 +73,8 @@ main {
 
 #player1Bar {
     background-color: #cffffe;
+    transition: top 0.2s;
+    transition-timing-function: linear;
 }
 
 #player2Bar {
